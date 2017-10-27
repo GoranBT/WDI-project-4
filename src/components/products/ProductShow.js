@@ -19,15 +19,17 @@ class ProductsShow extends React.Component {
       });
   }
 
-  deleteFood = () => {
+  deleteProduct = () => {
     Axios
-      .delete(`/api/products/${this.props.match.params.id}`)
+      .delete(`/api/products/${this.props.match.params.id}`,{
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       .then(() => this.props.history.push('/'));
   }
 
   createConversation = () => {
     Axios
-      .post('/api/conversations', { productId: this.state.product.id, userId: this.state.product.postedBy.id }, {
+      .post('/api/conversations', { product: this.state.product }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       .then(res => this.props.history.push(`/conversations/${res.data.id}`))

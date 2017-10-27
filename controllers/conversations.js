@@ -1,15 +1,19 @@
 const Conversation = require('../models/conversation');
 
 function conversationIndex(req, res, next) {
-  Conversation.find({ $or: [{ sender: req.currentUser.id }, { receiver: req.currentUser.id }] })
+  Conversation.find({ $or: [{ sender: req.currentUser }, { receiver: req.currentUser }] })
+    .populate('product sender receiver')
     .then(conversations => res.json(conversations))
     .catch(next);
 }
 
 function conversationsCreate(req, res, next) {
-  Conversation.findOne({ $or: [{ sender: req.body.userId }, {receiver: req.body.userId }], product: req.productId})
+  Conversation.findOne({ $or: [
+    { sender: req.body.product.postedBy, receiver: req.currentUser },
+    { receiver: req.body.product.postedBy, sender: req.currentUser }
+  ], product: req.product })
     .then(conversation => {
-      if(!conversation) return Conversation.create({ receiever: req.body.userId, product: req.body.productId });
+      if(!conversation) return Conversation.create({ sender: req.currentUser, receiver: req.body.product.postedBy, product: req.body.product });
       else return conversation;
     })
     .then(conversation => res.json(conversation))
@@ -35,7 +39,7 @@ function conversationShow(req, res, next) {
 function conversationsMessagesCreate(req, res, next) {
   req.body.user = req.currentUser;
   Conversation.findById(req.params.id)
-    .populate('user')
+    .populate('user product')
     .then(conversation => {
       console.log(conversation);
       conversation.messages.push(req.body);

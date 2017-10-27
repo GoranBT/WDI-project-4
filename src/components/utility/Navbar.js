@@ -17,7 +17,7 @@ const Navbar = ({ history }) => {
       {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/">Home</Link>}
       {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/products">Products</Link>}
       {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/conversations">Conversations</Link>}
-      {Auth.isAuthenticated() && <Link className="nav-item nav-link" to="/new">Add Product</Link>}
+      {Auth.isAuthenticated() && <Link className="nav-item nav-link" to="/products/new">Add Product</Link>}
       {!Auth.isAuthenticated() && <Link to="/login" className="nav-item nav-link">Login</Link>}
       {!Auth.isAuthenticated() && <Link to="/register" className="nav-item nav-link">Register</Link>}
       {Auth.isAuthenticated() && <a href="#" onClick={logout} className="nav-item nav-link">Logout</a>}

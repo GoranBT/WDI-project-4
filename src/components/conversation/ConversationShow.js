@@ -3,7 +3,7 @@ import Axios from 'axios';
 import Auth from '../../lib/Auth';
 import ConversationForm from './ConversationForm';
 
-class ConversationNew extends React.Component {
+class ConversationShow extends React.Component {
   state = {
     conversation: {
       messages: [],
@@ -31,7 +31,7 @@ class ConversationNew extends React.Component {
     Axios.post(`/api/conversations/${this.props.match.params.id}/messages`, { text: this.state.message }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(() => this.setState({ message: '' }))
+      .then(res => this.setState({ conversation: res.data, message: '' }))
       .catch(err => this.setState({ errors: err.response.data.errors }));
 
   }
@@ -41,23 +41,23 @@ class ConversationNew extends React.Component {
       <div>
         <h1>{this.state.conversation.product.name}</h1>
         <ul>
-          <ul>
-            {this.state.conversation.messages.map(message => <li key={message.id}>
+          {this.props.currentUser && this.state.conversation.messages.map(message => (
+            <li key={message.id} className={message.user.id === this.props.currentUser.id ? 'mine' : 'other-person'}>
               <p>{message.createdAt.substr(11, 8)}</p>
               <p>{message.text}</p>
               <p>{message.user.username}</p>
-            </li> )}
-          </ul>
+            </li>
+          ))}
         </ul>
         <ConversationForm
-          conversation={this.state.conversation}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           errors={this.state.errors}
+          message={this.state.message}
         />
       </div>
     );
   }
 }
 
-export default ConversationNew;
+export default ConversationShow;

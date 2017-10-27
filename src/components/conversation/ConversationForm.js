@@ -2,8 +2,7 @@ import React from 'react';
 
 
 
-const ConversationForm = ({ handleChange, handleSubmit, conversation }) => {
-  console.log(conversation);
+const ConversationForm = ({ handleChange, handleSubmit, message }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -12,7 +11,7 @@ const ConversationForm = ({ handleChange, handleSubmit, conversation }) => {
           name="message"
           placeholder="type your message"
           onChange={handleChange}
-          value={conversation.messages.message}
+          value={message}
           className="form-control"
         />
       </div>

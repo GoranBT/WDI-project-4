@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Auth from '../../lib/Auth';
 
-class ProductsIndex extends React.Component {
+class ProductIndex extends React.Component {
   state = {
     products: []
   }
@@ -40,4 +40,4 @@ class ProductsIndex extends React.Component {
   }
 }
 
-export default ProductsIndex;
+export default ProductIndex;
