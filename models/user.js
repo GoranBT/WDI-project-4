@@ -18,6 +18,13 @@ userSchema
   });
 
 userSchema
+  .virtual('conversations', {
+    ref: 'Conversation',
+    localField: '_id',
+    foreignField: 'user'
+  });
+
+userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;

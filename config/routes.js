@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const products  = require('../controllers/products');
 const categories  = require('../controllers/categories');
+const conversations  = require('../controllers/conversations');
 const users  = require('../controllers/users');
 const auth  = require('../controllers/auth');
 const oauth  = require('../controllers/oauth');
@@ -23,6 +24,18 @@ router.route('/categories/:id')
   .get(categories.show)
   .put(secureRoute, categories.update)
   .delete(secureRoute, categories.delete);
+
+router.route('/conversations')
+  .get(conversations.index)
+  .post(conversations.create);
+
+router.route('/conversations/:id/messages')
+  .post(conversations.messagesCreate);
+
+router.route('/conversations/:id')
+  .get(conversations.show);
+
+
 
 router.route('/users')
   .get(users.index);
