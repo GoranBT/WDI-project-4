@@ -1,32 +1,23 @@
 import React from 'react';
 
 
-const ConversationForm = ({ handleChange, handleSubmit, credentials, error }) => {
+
+const ConversationForm = ({ handleChange, handleSubmit, conversation }) => {
+  console.log(conversation);
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <input
           type="text"
-          name="email"
-          placeholder="Email"
+          name="message"
+          placeholder="type your message"
           onChange={handleChange}
-          value={credentials.email}
+          value={conversation.messages.message}
           className="form-control"
         />
-      </div>
-      <div className="form-group">
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          value={credentials.password}
-          className="form-control"
-        />
-        {error && <small className="has-error">{error}</small>}
       </div>
 
-      <button className="btn btn-primary">Login</button>
+      <button className="btn btn-primary">Send</button>
     </form>
   );
 };

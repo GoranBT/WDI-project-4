@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const messageSchema = mongoose.Schema({
   text: String,
-  user: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  read: { type: Boolean, default: false }
+}, {
+  timestamps: true
 });
 
 const conversationSchema = mongoose.Schema({
@@ -13,3 +16,10 @@ const conversationSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Conversation', conversationSchema);
+
+// conversationSchema
+//   .virtual('users', {
+//     ref: 'User',
+//     localField: '_id',
+//     foreignField: 'conversations'
+//   });

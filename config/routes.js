@@ -26,14 +26,14 @@ router.route('/categories/:id')
   .delete(secureRoute, categories.delete);
 
 router.route('/conversations')
-  .get(conversations.index)
-  .post(conversations.create);
+  .get(secureRoute, conversations.index)
+  .post(secureRoute, conversations.create);
 
 router.route('/conversations/:id/messages')
-  .post(conversations.messagesCreate);
+  .post(secureRoute, conversations.messagesCreate);
 
 router.route('/conversations/:id')
-  .get(conversations.show);
+  .get(secureRoute, conversations.show);
 
 
 

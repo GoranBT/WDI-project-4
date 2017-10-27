@@ -27,7 +27,9 @@ class ProductsShow extends React.Component {
 
   createConversation = () => {
     Axios
-      .post('/api/conversations/', {productId: this.state.product.id, userId: this.state.product.postedBy.id})
+      .post('/api/conversations', { productId: this.state.product.id, userId: this.state.product.postedBy.id }, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
       .then(res => this.props.history.push(`/conversations/${res.data.id}`))
       .catch(err => console.log(err));
   }
@@ -46,6 +48,7 @@ class ProductsShow extends React.Component {
           <h3>Conditoon: {this.state.product.condition}</h3>
           {<h4>Category: {this.state.product.category && this.state.product.category.name}</h4>}
           {<h4>Seller name: {this.state.product.category && this.state.product.postedBy.username}</h4>}
+          {<h4>Seller name: {this.state.product.category && this.state.product.postedBy.email}</h4>}
           <button onClick={this.createConversation} >message</button>
           {Auth.isAuthenticated() && <Link to={`/products/${this.state.product.id}/edit`} className="standard-button">
             <i className="fa fa-pencil" aria-hidden="true"></i>Edit

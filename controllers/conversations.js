@@ -1,7 +1,7 @@
 const Conversation = require('../models/conversation');
 
 function conversationIndex(req, res, next) {
-  Conversation.find()
+  Conversation.find({ $or: [{ sender: req.currentUser.id }, { receiver: req.currentUser.id }] })
     .then(conversations => res.json(conversations))
     .catch(next);
 }
@@ -19,7 +19,8 @@ function conversationsCreate(req, res, next) {
 function conversationShow(req, res, next) {
   Conversation
     .findById(req.params.id)
-    .populate('messages product user')
+    .populate('product messages.user')
+    .sort('messages.createdAt')
     .exec()
     .then((conversation) => {
       if(!conversation) return res.notFound();
@@ -32,7 +33,7 @@ function conversationShow(req, res, next) {
 
 
 function conversationsMessagesCreate(req, res, next) {
-  // req.body.user = req.currentUser;
+  req.body.user = req.currentUser;
   Conversation.findById(req.params.id)
     .populate('user')
     .then(conversation => {

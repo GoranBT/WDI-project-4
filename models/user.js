@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String },
   email: { type: String},
   image: String,
+  // conversations: { type: mongoose.Schema.ObjectId, ref: 'Conversation' },
   password: { type: String },
   facebookId: { type: String }
 });

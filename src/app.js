@@ -5,7 +5,8 @@ import 'bootstrap-css-only';
 
 import ProductIndex from './components/products/ProductIndex';
 import ProductShow from './components/products/ProductShow';
-import ConversationNew from './components/conversation/ConversationNew';
+import ConversationShow from './components/conversation/ConversationShow';
+import ConversationIndex from './components/conversation/ConversationIndex';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Navbar from './components/utility/Navbar';
@@ -26,7 +27,8 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/products" component={ProductIndex} />
                 <Route exact path="/products/:id" component={ProductShow} />
-                <Route exact path="/conversations/:id" component={ConversationNew} />
+                <Route exact path="/conversations" component={ConversationIndex} />
+                <Route exact path="/conversations/:id" component={ConversationShow} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
               </Switch>
