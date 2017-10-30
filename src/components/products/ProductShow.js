@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import GoogleMap from '../utility/GoogleMap';
 
 import Auth from '../../lib/Auth';
 
@@ -24,7 +25,7 @@ class ProductsShow extends React.Component {
       .delete(`/api/products/${this.props.match.params.id}`,{
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      .then(() => this.props.history.push('/'));
+      .then(() => this.props.history.push('/products'));
   }
 
   createConversation = () => {
@@ -39,26 +40,45 @@ class ProductsShow extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="image-tile col-md-6">
-          <img src={this.state.product.image} className="img-responsive" />
+        <div className="my col-lg-4 col-md-6 mb-4">
+          <div className="card">
+            <img className="card-img-top" src={this.state.product.imageSRC} alt="Card image cap" />
+          </div>
         </div>
 
-        <div className="col-md-6">
-          <h1>{this.state.product.id}</h1>
-          <h1>{this.state.product.postedBy && this.state.product.postedBy.id}</h1>
-          <h3>Description: {this.state.product.description}</h3>
-          <h3>Conditoon: {this.state.product.condition}</h3>
-          {<h4>Category: {this.state.product.category && this.state.product.category.name}</h4>}
-          {<h4>Seller name: {this.state.product.category && this.state.product.postedBy.username}</h4>}
-          {<h4>Seller name: {this.state.product.category && this.state.product.postedBy.email}</h4>}
-          <button onClick={this.createConversation} >message</button>
-          {Auth.isAuthenticated() && <Link to={`/products/${this.state.product.id}/edit`} className="standard-button">
+        <div className="my col-lg-4 col-md-6 mb-4">
+          <p><strong>Product:</strong> {this.state.product.name}</p>
+          <p><strong>Description:</strong> {this.state.product.description}</p>
+          <p><strong>Price:</strong> {this.state.product.price}£</p>
+          <p><strong>Conditoon:</strong> {this.state.product.condition}</p>
+          {<p><strong>Category:</strong> {this.state.product.category && this.state.product.category.name}</p>}
+          {Auth.isAuthenticated() && <button className="btn btn-outline-success" onClick={this.createConversation} ><i className="fa fa-envelope" aria-hidden="true"></i> message</button>}
+          {Auth.isAuthenticated() && <Link to={`/products/${this.state.product.id}/edit`}><button className="btn btn-outline-success">
             <i className="fa fa-pencil" aria-hidden="true"></i>Edit
-          </Link>}
+          </button></Link>}
           {' '}
-          {Auth.isAuthenticated() && <button className="main-button" onClick={this.deleteProduct}>
+          {Auth.isAuthenticated() && <button className="btn btn-outline-success" onClick={this.deleteProduct}>
             <i className="fa fa-trash" aria-hidden="true"></i>Delete
           </button>}
+          <hr />
+          <div>
+            {this.state.product.location &&
+              <GoogleMap
+                center={this.state.product.location}
+              />}
+          </div>
+        </div>
+        <div className="my col-lg-4 col-md-6 mb-4">
+          <div className="card h-100">
+            {this.state.product.postedBy && <Link to={`/users/${this.state.product.postedBy.id}`}>
+              <img className="card-img-top" src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" alt=""></img>
+              <div className="card-body">
+                <h4 className="bottom-border card-title">
+                  {this.state.product.postedBy.username}
+                </h4>
+              </div>
+            </Link>}
+          </div>
         </div>
       </div>
     );

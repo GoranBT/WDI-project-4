@@ -39,11 +39,12 @@ function conversationShow(req, res, next) {
 function conversationsMessagesCreate(req, res, next) {
   req.body.user = req.currentUser;
   Conversation.findById(req.params.id)
-    .populate('user product')
+    .populate('messages.user product sender receiver')
     .then(conversation => {
       console.log(conversation);
       conversation.messages.push(req.body);
       return conversation.save();
+      // email.send(conversation);
     })
     .then(conversation => res.json(conversation))
     .catch(next);

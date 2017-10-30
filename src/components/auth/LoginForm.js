@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
+const LoginForm = ({ handleChange, handleSubmit, credentials, errors }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="box rounded col-md-6">
       <div className="form-group">
         <input
           type="text"
@@ -23,7 +23,7 @@ const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
           value={credentials.password}
           className="form-control"
         />
-        {error && <small className="has-error">{error}</small>}
+        {errors && <small className="has-error">{errors}</small>}
       </div>
 
       <button className="btn btn-primary">Login</button>

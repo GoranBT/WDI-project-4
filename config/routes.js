@@ -6,14 +6,16 @@ const users  = require('../controllers/users');
 const auth  = require('../controllers/auth');
 const oauth  = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
+const imageUpload = require('../lib/imageUpload');
+
 
 router.route('/products')
   .get(products.index)
-  .post(secureRoute, products.create);
+  .post(secureRoute, imageUpload, products.create);
 
 router.route('/products/:id')
   .get(products.show)
-  .put(secureRoute, products.update)
+  .put(secureRoute, imageUpload, products.update)
   .delete(secureRoute, products.delete);
 
 router.route('/categories')
@@ -38,10 +40,11 @@ router.route('/conversations/:id')
 
 
 router.route('/users')
-  .get(users.index);
+  .get(secureRoute, users.index);
 
 router.route('/users/:id')
-  .get(users.show);
+  .get(secureRoute, imageUpload, users.show)
+  .put(secureRoute, imageUpload, users.update);
 
 router.route('/register')
   .post(auth.register);

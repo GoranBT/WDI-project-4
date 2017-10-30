@@ -13,7 +13,14 @@ class Register extends React.Component {
       password: '',
       passwordConfirmation: ''
     },
-    errors: {}
+    errors: {
+      firstname: '',
+      lastname: '',
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    }
   };
 
   handleChange = ({ target: { name, value }}) => {
@@ -30,12 +37,14 @@ class Register extends React.Component {
 
   render() {
     return (
-      <LoginForm
-        user={this.state.user}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        errors={this.state.errors}
-      />
+      <div className="justify-content-around box rounded col-md-6">
+        <LoginForm
+          user={this.state.user}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          errors={this.state.errors}
+        />
+      </div>
     );
   }
 }

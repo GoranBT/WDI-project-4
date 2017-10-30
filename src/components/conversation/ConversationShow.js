@@ -18,7 +18,12 @@ class ConversationShow extends React.Component {
       .get(`/api/conversations/${this.props.match.params.id}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      .then(res => this.setState({ conversation: res.data }));
+      .then(res => this.setState({ conversation: res.data }, this.stickyScroll));
+  }
+
+  stickyScroll() {
+    var objDiv = document.getElementsByClassName('conversation')[0];
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
 
   handleChange = ({ target: { value }}) => {
@@ -31,24 +36,41 @@ class ConversationShow extends React.Component {
     Axios.post(`/api/conversations/${this.props.match.params.id}/messages`, { text: this.state.message }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(res => this.setState({ conversation: res.data, message: '' }))
+      .then(res => this.setState({ conversation: res.data, message: '' }, this.stickyScroll))
       .catch(err => this.setState({ errors: err.response.data.errors }));
 
   }
 
   render() {
+    const { userId } = Auth.getPayload();
     return (
-      <div>
-        <h1>{this.state.conversation.product.name}</h1>
-        <ul>
-          {this.props.currentUser && this.state.conversation.messages.map(message => (
-            <li key={message.id} className={message.user.id === this.props.currentUser.id ? 'mine' : 'other-person'}>
-              <p>{message.createdAt.substr(11, 8)}</p>
-              <p>{message.text}</p>
-              <p>{message.user.username}</p>
-            </li>
-          ))}
-        </ul>
+      <div className="box white rounded">
+        {<h1>{!this.state.conversation && this.state.conversation.sender.username}</h1>}
+        <div className="conversation content container-fluid bootstrap snippets">
+          <div className="row row-broken">
+            <div className="col-sm-11 col-xs-12 chat">
+              <div className="col-inside-lg decor-default">
+                <div className="chat-body">
+                  {this.state.conversation.messages.map(message => (
+
+                    <div key={message.id} className={message.user.id === userId ? 'answer right' : 'answer left'}>
+                      <div className="avatar">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"/>
+                        {/* <div className="status offline"></div> */}
+                      </div>
+                      <div className="name">{message.user.username}</div>
+                      <div className="text">{message.text}</div>
+                      <div className="time">{message.createdAt.substr(11, 8)}</div>
+                    </div>
+
+
+                  ))}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <ConversationForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

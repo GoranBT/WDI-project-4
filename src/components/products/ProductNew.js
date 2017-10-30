@@ -10,15 +10,34 @@ class ProductsNew extends React.Component {
       name: '',
       description: '',
       price: '',
-      location: {},
+      location: {
+        lat: '',
+        lng: ''
+      },
       image: '',
-      category: ''
+      base64: '',
+      category: '',
+      postedBy: ''
     },
+    categories: [],
     errors: {}
   };
 
+  componentDidMount() {
+    Axios
+      .get('/api/categories')
+      .then(res => this.setState({ categories: res.data }))
+      .catch(() => console.log('Could not get categories'));
+  }
+
   handleChange = ({ target: { name, value } }) => {
+    console.log('VAL',value);
     const product = Object.assign({}, this.state.product, { [name]: value });
+    this.setState({ product });
+  }
+
+  handleLocationChange = ({ target: { name, value } }) => {
+    const product = { ...this.state.product, location: { ...this.state.product.location, [name]: value } };
     this.setState({ product });
   }
 
@@ -33,15 +52,40 @@ class ProductsNew extends React.Component {
       .catch(err => this.setState({ errors: err.response.data.errors }));
   }
 
+  getAutocompleteInfo = (place) => {
+    console.log('place', place);
+    const { lat, lng } = place.geometry.location.toJSON();
+
+
+    this.setState(prevState => {
+      const locations = prevState.data.locations.map((location) => {
+        Object.assign(location, { location: { lat, lng }});
+        console.log(location);
+        return location;
+      });
+
+      const data = Object.assign({}, this.state.data, { locations });
+      this.setState({ data });
+    });
+  }
+
   render() {
+
     return (
-      <ProductForm
-        history={this.props.history}
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        product={this.state.product}
-        errors={this.state.errors}
-      />
+      <div>
+        <h1 className="font-lobster text-center"> Add new product</h1>
+        <hr />
+        <ProductForm
+          categories={this.state.categories}
+          history={this.props.history}
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          product={this.state.product}
+          errors={this.state.errors}
+          handleLocationChange={this.handleLocationChange}
+          getAutocompleteInfo={this.getAutocompleteInfo}
+        />
+      </div>
     );
   }
 }

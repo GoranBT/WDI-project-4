@@ -13,15 +13,24 @@ const Navbar = ({ history }) => {
 
   return(
 
-    <nav className="navbar navbar-light bg-light">
-      {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/">Home</Link>}
-      {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/products">Products</Link>}
-      {Auth.isAuthenticated() && <Link className="nav-item nav-link my-2" to="/conversations">Conversations</Link>}
-      {Auth.isAuthenticated() && <Link className="nav-item nav-link" to="/products/new">Add Product</Link>}
-      {!Auth.isAuthenticated() && <Link to="/login" className="nav-item nav-link">Login</Link>}
-      {!Auth.isAuthenticated() && <Link to="/register" className="nav-item nav-link">Register</Link>}
-      {Auth.isAuthenticated() && <a href="#" onClick={logout} className="nav-item nav-link">Logout</a>}
+
+    <nav className="navbar navbar-default">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <Link className="brand display-4 nav-link" to="/products  ">eShopper</Link>
+        </div>
+        <div className="navbar-right">
+          {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products">Products</Link>}
+          {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products/new">Add Product</Link>}
+          {Auth.isAuthenticated() && <Link className="navbar-brand" to="/conversations"><i className="fa fa-envelope" aria-hidden="true"></i></Link>}
+          {Auth.isAuthenticated() && <a href="#" onClick={logout} className="navbar-brand"><i className="fa fa-sign-out" aria-hidden="true"></i> Logout</a>}
+          {!Auth.isAuthenticated() && <Link to="/login" className="navbar-brand"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</Link>}
+          {!Auth.isAuthenticated() && <Link to="/register" className="navbar-brand"><i className="icon-chevron-sign-up" aria-hidden="true"></i> Register</Link>}
+          {Auth.isAuthenticated() && <Link to={`/users/${Auth.getPayload().userId}`} className="navbar-brand"><i className="fa fa-user-o" aria-hidden="true"></i></Link>}
+        </div>
+      </div>
     </nav>
+
   );
 };
 

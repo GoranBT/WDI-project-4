@@ -10,7 +10,9 @@ function productsIndex(req, res, next) {
 }
 
 function productsCreate(req, res, next) {
-  req.body.postedBy = req.user;
+  req.body.postedBy = req.currentUser;
+  if(req.file) req.body.image = req.file.filename;
+
   Product
     .create(req.body)
     .then(product => res.status(201).json(product))
