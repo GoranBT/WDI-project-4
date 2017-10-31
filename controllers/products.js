@@ -59,10 +59,17 @@ function productsDelete(req, res, next) {
     .catch(next);
 }
 
+// function productsFavorite(req, res) {
+//
+//
+// }
+
+
 module.exports = {
   index: productsIndex,
   create: productsCreate,
   show: productsShow,
   update: productsUpdate,
   delete: productsDelete
+  // favourite: productsFavorite
 };

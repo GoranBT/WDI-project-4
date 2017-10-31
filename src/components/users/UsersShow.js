@@ -26,7 +26,7 @@ class UsersShow extends React.Component {
     return (
       <div className="row">
         <div className="image-tile col-md-6">
-          <img src={this.state.user.username} className="img-responsive" />
+          <img src={this.state.user.imageSRC} className="img-responsive" />
         </div>
         <h1>{this.state.user.username}</h1>
       </div>

@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: 'Username is required' },
   email: { type: String, required: 'email is required'},
   image: String,
+  favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   password: { type: String },
   facebookId: { type: String }
 });

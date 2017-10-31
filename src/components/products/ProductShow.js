@@ -71,7 +71,7 @@ class ProductsShow extends React.Component {
         <div className="my col-lg-4 col-md-6 mb-4">
           <div className="card h-100">
             {this.state.product.postedBy && <Link to={`/users/${this.state.product.postedBy.id}`}>
-              <img className="card-img-top" src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" alt=""></img>
+              {this.state.product.postedBy && <img className="card-img-top" src={this.state.product.postedBy.imageSRC} alt=""></img>}
               <div className="card-body">
                 <h4 className="bottom-border card-title">
                   {this.state.product.postedBy.username}

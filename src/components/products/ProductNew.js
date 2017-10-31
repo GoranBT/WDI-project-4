@@ -54,19 +54,8 @@ class ProductsNew extends React.Component {
 
   getAutocompleteInfo = (place) => {
     console.log('place', place);
-    const { lat, lng } = place.geometry.location.toJSON();
-
-
-    this.setState(prevState => {
-      const locations = prevState.data.locations.map((location) => {
-        Object.assign(location, { location: { lat, lng }});
-        console.log(location);
-        return location;
-      });
-
-      const data = Object.assign({}, this.state.data, { locations });
-      this.setState({ data });
-    });
+    const product = Object.assign({}, this.state.product, { location: place.geometry.location.toJSON() });
+    this.setState({ product });
   }
 
   render() {

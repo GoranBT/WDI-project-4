@@ -3,6 +3,7 @@ import DragDrop from '../utility/DragDrop';
 import AutoComplete from '../utility/AutoComplete';
 
 function ProductForm({ categories, handleSubmit, handleChange, handleLocationChange, product, errors, getAutocompleteInfo }) {
+  console.log(product);
   return (
 
     <div className="row justify-content-around">

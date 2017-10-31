@@ -17,7 +17,8 @@ const Navbar = ({ history }) => {
     <nav className="navbar navbar-default">
       <div className="container-fluid">
         <div className="navbar-header">
-          <Link className="brand display-4 nav-link" to="/products  ">eShopper</Link>
+          <Link className="brand font-lobster display-4 nav-link" to="/products  "><i className="fa fa-shopping-cart" aria-hidden="true"></i> eShopper
+          </Link>
         </div>
         <div className="navbar-right">
           {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products">Products</Link>}

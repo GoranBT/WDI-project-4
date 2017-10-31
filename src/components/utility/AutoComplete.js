@@ -1,7 +1,7 @@
 /* global google */
 import React from 'react';
 
-const AutoComplete = ({ index, getAutocompleteInfo }) => {
+const AutoComplete = ({ getAutocompleteInfo }) => {
 
   function initAutocomplete(input) {
     if(!input) return false;
@@ -9,7 +9,7 @@ const AutoComplete = ({ index, getAutocompleteInfo }) => {
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
       // getAutocompleteInfo is a method that we pass in as props
-      getAutocompleteInfo(index, place);
+      getAutocompleteInfo(place);
     });
   }
 

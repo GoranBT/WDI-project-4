@@ -1,4 +1,5 @@
 import React from 'react';
+import DragDrop from '../utility/DragDrop';
 
 
 const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
@@ -27,6 +28,16 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
         />
         {errors.email && <small className="has-error">{errors.email}</small>}
       </div>
+
+      <div className={errors.image ? 'form-group has-error' : 'form-group'}>
+        <label htmlFor="image"><strong>Image</strong></label>
+        <DragDrop
+          onChange={handleChange}
+          value={user.base64 || user.imageSRC}
+        />
+        {errors.image && <small className="has-error">{errors.image}</small>}
+      </div>
+
 
       <div className={errors.password ? 'form-group has-error' : 'form-group'}>
         <input

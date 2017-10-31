@@ -11,7 +11,9 @@ class Register extends React.Component {
       username: '',
       email: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      image: '',
+      base64: ''
     },
     errors: {
       firstname: '',
