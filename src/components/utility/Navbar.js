@@ -17,7 +17,7 @@ const Navbar = ({ history }) => {
     <nav className="navbar navbar-default">
       <div className="container-fluid">
         <div className="navbar-header">
-          <Link className="brand font-lobster display-4 nav-link" to="/products  "><i className="fa fa-shopping-cart" aria-hidden="true"></i> eShopper
+          <Link className="brand font-lobster display-4 nav-link" to="/"><i className="fa fa-shopping-cart" aria-hidden="true"></i> eShopper
           </Link>
         </div>
         <div className="navbar-right">

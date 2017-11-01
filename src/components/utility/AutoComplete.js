@@ -14,13 +14,15 @@ const AutoComplete = ({ getAutocompleteInfo }) => {
   }
 
   return (
-    <input
-      type="text"
-      className="form-control"
-      id="locations"
-      name="locations"
-      ref={(element) => initAutocomplete(element)}
-    />
+    <div className="form-group">
+      <input
+        type="text"
+        className="form-control"
+        id="locations"
+        name="locations"
+        ref={(element) => initAutocomplete(element)}
+      />
+    </div>
   );
 };
 

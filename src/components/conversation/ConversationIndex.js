@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 
 
@@ -20,12 +21,24 @@ class ProductsShow extends React.Component {
         console.log(err);
       });
   }
+
+  getUser = (conversation) => {
+    const { userId } = Auth.getPayload();
+    return conversation.sender.id === userId ? conversation.sender : conversation.receiver;
+  }
+
   render() {
     return (
-      <div className="row">
-        {this.state.conversations.map(conversation => <div key={conversation.id}>
-          <a href={`/conversations/${conversation.id}`}>{conversation.product.name}</a>
+      <div className="row" id="conversationsIndex">
+        {this.state.conversations && this.state.conversations.map(conversation => <div className="boxClass col-md-6" key={conversation.id}>
+          <Link className="btn btn-outline-success"
+            to={`/conversations/${conversation.id}`}>
+            <img src={this.getUser(conversation).imageSRC}/>
+            <span>{this.getUser(conversation).username}</span>
+          </Link>
+          <hr />
         </div>)}
+
       </div>
     );
   }

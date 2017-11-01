@@ -1,0 +1,19 @@
+div.drag-drop {
+  margin: 0 auto;
+  width: 250px;
+  input[type=file] {
+    display: none;
+  }
+
+  div.dropzone {
+    min-height: 150px;
+    width: 250px;
+    background-color: #fafafa;
+    background-size: contain;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    background-image: url("https://cdn.colorlib.com/wp/wp-content/uploads/sites/2/jquery-file-upload-scripts.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

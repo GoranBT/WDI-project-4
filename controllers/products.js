@@ -3,7 +3,8 @@ const Product = require('../models/product');
 function productsIndex(req, res, next) {
   Product
     .find()
-    .populate('category postedBy')
+    .populate('category postedBy comments.createdBy')
+    .sort({createdAt: -1})
     .exec()
     .then(products => res.json(products))
     .catch(next);
@@ -22,7 +23,7 @@ function productsCreate(req, res, next) {
 function productsShow(req, res, next) {
   Product
     .findById(req.params.id)
-    .populate('category postedBy')
+    .populate('category postedBy comments.createdBy')
     .exec()
     .then((product) => {
       if(!product) return res.notFound();
@@ -59,10 +60,40 @@ function productsDelete(req, res, next) {
     .catch(next);
 }
 
-// function productsFavorite(req, res) {
-//
-//
-// }
+function addCommentRoute(req, res, next) {
+
+  req.body.createdBy = req.currentUser;
+
+  Product
+    .findById(req.params.id)
+    .exec()
+    .then((product) => {
+      if(!product) return res.notFound();
+
+      const comment = product.comments.create(req.body);
+      product.comments.push(comment);
+
+      return product.save()
+        .then(() => res.json(comment));
+    })
+    .catch(next);
+}
+function deleteCommentRoute(req, res, next) {
+  Product
+    .findById(req.params.id)
+    .exec()
+    .then((product) => {
+      if(!product) return res.notFound();
+
+      const comment = product.comments.id(req.params.commentId);
+      comment.remove();
+
+      return product.save();
+    })
+    .then(() => res.status(204).end())
+    .catch(next);
+}
+
 
 
 module.exports = {
@@ -70,6 +101,7 @@ module.exports = {
   create: productsCreate,
   show: productsShow,
   update: productsUpdate,
-  delete: productsDelete
-  // favourite: productsFavorite
+  delete: productsDelete,
+  createComments: addCommentRoute,
+  deleteComments: deleteCommentRoute
 };

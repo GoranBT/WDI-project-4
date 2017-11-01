@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const s3 = require('../lib/s3');
 
+
+
+const commentSchema = new mongoose.Schema({
+  text: { type: String, required: true},
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+});
+
 const productSchema = mongoose.Schema({
   name: { type: String, required: 'Name is required' },
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
@@ -13,9 +20,11 @@ const productSchema = mongoose.Schema({
   location: {
     lat: Number,
     lng: Number
-  }
+  },
+  comments: [ commentSchema ]
+}, {
+  timestamps: true
 });
-
 
 productSchema
   .path('image')

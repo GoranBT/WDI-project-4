@@ -16,11 +16,21 @@ class ProductsNew extends React.Component {
       },
       image: '',
       base64: '',
-      category: '',
       postedBy: ''
     },
     categories: [],
-    errors: {}
+    errors: {
+      name: '',
+      description: '',
+      price: '',
+      location: {
+        lat: '',
+        lng: ''
+      },
+      image: '',
+      base64: ''
+
+    }
   };
 
   componentDidMount() {
@@ -43,6 +53,8 @@ class ProductsNew extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(this.state.product);
 
     Axios
       .post('/api/products', this.state.product, {

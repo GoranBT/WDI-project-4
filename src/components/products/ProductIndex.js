@@ -5,7 +5,6 @@ import SearchBar from '../utility/SearchBar';
 import _ from 'lodash';
 import 'bootstrap-css-only';
 
-// import Auth from '../../lib/Auth';
 
 class ProductIndex extends React.Component {
   state = {
@@ -61,14 +60,18 @@ class ProductIndex extends React.Component {
             {products.map(product => {
               return (
                 <div key={product.id} className="col-lg-4 col-md-6 mb-4">
-                  <div className="card h-100">
+                  <div className="shaddow card h-100">
                     <Link to={`/products/${product.id}`}>
-                      <img className="card-img-top" src={product.imageSRC} alt=""></img>
+                      <div className="overlay-wrapper">
+                        <img className="card-img-top medium objectImage" src={product.imageSRC} alt=""></img>
+                        {product.sold ? <div className="sold-overlay"><span>Sold</span></div> : null}
+                      </div>
+
                       <div className="card-body">
                         <h4 className="bottom-border card-title">
                           {product.name}
                         </h4>
-                        <h5 className="bottom-border">£{product.price}</h5>
+                        <h5 className="bottom-border">price £{product.price}</h5>
                         <p className="card-text">{product.description}</p>
                       </div>
                     </Link>

@@ -1,5 +1,5 @@
 const Conversation = require('../models/conversation');
-const emails = require('./emails');
+const emails = require('../lib/email');
 
 function conversationIndex(req, res, next) {
   Conversation.find({ $or: [{ sender: req.currentUser }, { receiver: req.currentUser }] })
@@ -39,26 +39,17 @@ function conversationShow(req, res, next) {
 
 function conversationsMessagesCreate(req, res, next) {
   req.body.user = req.currentUser;
+  let receiver = null;
   Conversation.findById(req.params.id)
     .populate('messages.user product sender receiver')
     .then(conversation => {
-      console.log(conversation);
       const message = conversation.messages.create(req.body);
       conversation.messages.push(message);
-
-      // find the other user (not the current user) from the conversation
-        // if(conversation.sender.id !== req.currentUser.id) receiver = conversation.sender
-        // else receiver = conversation.receiver
-      // use that email to send the message
-      // use the message to populate the email template
-        // pass receiver and message into email template
-      // send the message
-        // return emails.send(receiver, message)
-        // .then(() => conversation.save());
+      receiver = (conversation.sender.id !== req.currentUser.id) ? conversation.sender : conversation.receiver;
       return conversation.save();
-
     })
     .then(conversation => res.json(conversation))
+    .then(() => emails.send(receiver))
     .catch(next);
 }
 

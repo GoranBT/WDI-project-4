@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
   favorites: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   password: { type: String },
   facebookId: { type: String }
+}, {
+  timestamps: true
 });
 
 
@@ -63,7 +65,7 @@ userSchema
 userSchema
   .virtual('imageSRC')
   .get(function getImageSRC() {
-    if(!this.image) return null;
+    if(!this.image) return 'https://vignette1.wikia.nocookie.net/joke-battles/images/4/49/UserIcon.png/revision/latest?cb=20161202233401';
     if(this.image.match(/^http/)) return this.image;
     return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
   });

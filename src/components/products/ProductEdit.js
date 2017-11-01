@@ -20,7 +20,18 @@ class ProductsEdit extends React.Component {
       postedBy: ''
     },
     categories: [],
-    errors: {}
+    errors: {
+      name: '',
+      description: '',
+      price: '',
+      location: {
+        lat: '',
+        lng: ''
+      },
+      image: '',
+      base64: '',
+      category: ''
+    }
   };
 
   componentDidMount() {
@@ -53,7 +64,7 @@ class ProductsEdit extends React.Component {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       .then(res => this.props.history.push(`/products/${res.data.id}`))
-      .catch(err => console.log(err));
+      .catch(err => this.setState({ errors: err.response.data.errors }, ()=> console.log(this.state)));
   }
 
   getDataURL = (dataURL) => {

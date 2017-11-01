@@ -8,9 +8,10 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
 
     <div className="row justify-content-around">
 
-      <form onSubmit={handleSubmit} className="white box rounded col-md-7">
-        <div className={errors.name ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="name"><strong>Name</strong></label>
+      <form onSubmit={handleSubmit} className="newProduct shaddow white box rounded col-md-9">
+
+        <label htmlFor="name"><strong>Name</strong></label>
+        <div className={errors.name ? 'form-group has-warning' : 'form-group'}>
           <input
             type="text"
             className="form-control"
@@ -19,10 +20,11 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.name}
             onChange={handleChange}
           />
-          {errors.name && <small className="has-error">{errors.name}</small>}
+          {errors.name && <small className="has-warning">{errors.name}</small>}
         </div>
-        <div className={errors.description ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="description"><strong>Description</strong></label>
+
+        <label htmlFor="description"><strong>Description</strong></label>
+        <div className={errors.description ? 'form-group has-warning' : 'form-group'}>
           <input
             type="text"
             className="form-control"
@@ -31,10 +33,11 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.description}
             onChange={handleChange}
           />
-          {errors.description && <small className="has-error">{errors.description}</small>}
+          {errors.description && <small className="has-warning">{errors.description}</small>}
         </div>
-        <div className={errors.price ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="price"><strong>Price</strong></label>
+
+        <label htmlFor="price"><strong>Price</strong></label>
+        <div className={errors.price ? 'form-group has-warning' : 'form-group'}>
           <input
             type="text"
             className="form-control"
@@ -43,18 +46,20 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.price}
             onChange={handleChange}
           />
-          {errors.price && <small className="has-error">{errors.price}</small>}
+          {errors.price && <small className="has-warning">{errors.price}</small>}
         </div>
-        <div className={errors.image ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="image"><strong>Image</strong></label>
+
+        <label htmlFor="image"><strong>Image</strong></label>
+        <div className={errors.image ? 'form-group has-warning' : 'form-group'}>
           <DragDrop
             onChange={handleChange}
             value={product.base64 || product.imageSRC}
           />
-          {errors.image && <small className="has-error">{errors.image}</small>}
+          {errors.image && <small className="has-warning">{errors.image}</small>}
         </div>
-        <div className={errors.condition ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="condition"><strong>Condition</strong></label>
+
+        <label htmlFor="condition"><strong>Condition</strong></label>
+        <div className={errors.condition ? 'form-group has-warning' : 'form-group'}>
           <input
             type="text"
             className="form-control"
@@ -63,10 +68,11 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.condition}
             onChange={handleChange}
           />
-          {errors.condition && <small className="has-error">{errors.condition}</small>}
+          {errors.condition && <small className="has-warning">{errors.condition}</small>}
         </div>
+        <label htmlFor="location"><strong>Location</strong></label>
         <AutoComplete getAutocompleteInfo={getAutocompleteInfo} value={location}  />
-        <div className="form-group">
+        <div className="hid-location form-group">
           <label htmlFor="lat">Location Lat</label>
           <input
             type="text"
@@ -76,9 +82,8 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.location.lat}
             onChange={handleLocationChange}
           />
-          {/* {errors.location.lat && <small className="has-error">{errors.location.lat}</small>} */}
         </div>
-        <div className="form-group">
+        <div className="form-group hid-location">
           <label htmlFor="location.lng">Location Lng</label>
           <input
             type="text"
@@ -88,15 +93,15 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
             value={product.location.lng}
             onChange={handleLocationChange}
           />
-          {/* {errors.location.lng && <small className="has-error">{errors.location.lng}</small>} */}
         </div>
-        <div className={errors.category ? 'form-group has-error' : 'form-group'}>
-          <label htmlFor="category">Category</label>
+
+        <label htmlFor="category"><strong>Category</strong></label>
+        <div className={errors.category ? 'form-group has-warning' : 'form-group'}>
           <select
             className="form-control"
             id="category"
             name="category"
-            value={product.category}
+            defaultValue=""
             onChange={handleChange}
           >
             <option value="" disabled>Please Select</option>
@@ -104,7 +109,7 @@ function ProductForm({ categories, handleSubmit, handleChange, handleLocationCha
               <option key={category.id} value={category.id}>{category.name}</option>
             )}
           </select>
-          {errors.category && <small className="has-error">{errors.category}</small>}
+          {errors.category && <small className="has-warning">{errors.category}</small>}
         </div>
         <div>
           <button className="btn btn-outline-success">Save</button>

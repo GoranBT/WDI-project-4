@@ -3,15 +3,15 @@ import { Row, Col, FormGroup, FormControl } from 'react-bootstrap';
 
 
 const SearchBar = ({ handleSort, handleSearch, categories, handleOrigin }) => {
-  
+
   return(
     <Row>
       <Col md={12}>
         <FormGroup>
           <FormControl componentClass="select" onChange={handleOrigin}>
-            <option value="">Select</option>
+            <option className="dropdown-item" value="">Select</option>
             {categories.map((category)=>
-              <option key={category.id} default={''} value={category.name}>{category.name}</option>
+              <option className="dropdown-item" key={category.id} default={''} value={category.name}>{category.name}</option>
             )}
           </FormControl>
         </FormGroup>

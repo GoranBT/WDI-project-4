@@ -7,7 +7,6 @@ const auth  = require('../controllers/auth');
 const oauth  = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
 const imageUpload = require('../lib/imageUpload');
-const emails = require('../controllers/emails');
 
 
 
@@ -39,8 +38,11 @@ router.route('/conversations/:id/messages')
 router.route('/conversations/:id')
   .get(secureRoute, conversations.show);
 
-router.route('/conversations/:id/send')
-  .post(emails.send);
+router.route('/products/:id/comments')
+  .post(secureRoute, products.createComments);
+
+router.route('/products/:id/comments/:commentId')
+  .delete(secureRoute, products.deleteComments);
 
 router.route('/users')
   .get(secureRoute, imageUpload, users.index);

@@ -1,0 +1,16 @@
+#conversationsIndex {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  hr {
+    background-color: gray;
+    padding: 1px;
+    width: 100%;
+  }
+}

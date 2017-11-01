@@ -10,7 +10,9 @@ class ConversationShow extends React.Component {
       product: {}
     },
     message: '',
-    errors: {}
+    errors: {
+      message: ''
+    }
   }
 
   componentWillMount() {
@@ -52,20 +54,15 @@ class ConversationShow extends React.Component {
               <div className="col-inside-lg decor-default">
                 <div className="chat-body">
                   {this.state.conversation.messages.map(message => (
-
                     <div key={message.id} className={message.user.id === userId ? 'answer right' : 'answer left'}>
                       <div className="avatar">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"/>
-                        {/* <div className="status offline"></div> */}
+                        <img src={message.user.imageSRC}/>
                       </div>
                       <div className="name">{message.user.username}</div>
                       <div className="text">{message.text}</div>
                       <div className="time">{message.createdAt.substr(11, 8)}</div>
                     </div>
-
-
                   ))}
-
                 </div>
               </div>
             </div>
