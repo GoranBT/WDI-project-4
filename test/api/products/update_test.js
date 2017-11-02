@@ -117,7 +117,7 @@ describe('PUT /api/products/:id', () => {
         expect(productItem.price).to.equal(productData[0].price);
         expect(productItem.condition).to.equal(productData[0].condition);
         expect(productItem.description).to.equal(productData[0].description);
-        expect(productItem.comments).to.be.a('array');
+        expect(productItem.questions).to.be.a('array');
         done();
       });
   });

@@ -6,22 +6,22 @@ class CarouselHome extends React.Component {
     return (
       <Carousel className="carousel" showArrows={true} showThumbs={false} useKeyboardArrows={true}
         showStatus={false} showIndicators={false}
-        stopOnHover={true}>
+        stopOnHover={true} transitionTime={400} autoPlay={true} infiniteLoop={true}>
         <div>
-          <img src='./assets/carousel2.png' />
-          {/* <p className="legend"></p> */}
+          <img src='./assets/carosesl7.jpg' />
+
+          <div className="carousel-content">
+            <h2>Amazing products</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+          </div>
         </div>
         <div>
-          <img src='./assets/carousel1.png' />
-          {/* <p className="legend"></p> */}
+          <img src='./assets/carousel8.jpg' />
+          <p className="legend">easy way to sell your unused items</p>
         </div>
         <div>
-          <img src='./assets/carousel.jpg' />
-          {/* <p className="legend"></p> */}
-        </div>
-        <div>
-          <img src='./assets/glasses.jpg' />
-          {/* <p className="legend"></p> */}
+          <img src='./assets/Cover12.jpg' />
+          <p className="legend">easy way to sell your unused items</p>
         </div>
       </Carousel>
     );

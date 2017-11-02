@@ -28,7 +28,14 @@ body {
 }
 
 .carousel {
-  height: 400px;
+  height: 60vh;
+  position: relative;
+}
+
+.carousel-content {
+  position: absolute;
+  top: 5%;
+  left: 5%;
 }
 
 .bottom-border {
@@ -144,6 +151,11 @@ button {
   width: 100%;
 }
 
+.container-fluid {
+  // margin-top: 20px;
+  padding: 60px;
+}
+
 @media only screen  and (max-width: 900px) {
   .carousel {
     display: none;
@@ -154,4 +166,15 @@ button {
   .hidden {
     display: flex;
   }
+
+}
+@media only screen  and (max-width: 700px) {
+.brand {
+  font-size: 15px;
+}
+.userImage {
+  height: 250px;
+  width: 250px;
+
+}
 }

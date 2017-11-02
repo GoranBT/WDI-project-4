@@ -6,7 +6,7 @@ div.drag-drop {
   }
 
   div.dropzone {
-    min-height: 150px;
+    height: 250px;
     width: 250px;
     background-color: #fafafa;
     background-size: contain;
@@ -15,5 +15,6 @@ div.drag-drop {
     background-image: url("https://cdn.colorlib.com/wp/wp-content/uploads/sites/2/jquery-file-upload-scripts.png");
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }

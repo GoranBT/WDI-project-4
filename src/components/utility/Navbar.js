@@ -28,9 +28,10 @@ const Navbar = ({ history }) => {
 
         <div className="navbar-right">
           {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products">Products</Link>}
-          {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products/new">Add Product</Link>}
+          {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products/new"><i className="fa fa-plus" aria-hidden="true"></i>
+          </Link>}
           {Auth.isAuthenticated() && <Link className="navbar-brand" to="/conversations"><i className="fa fa-envelope" aria-hidden="true"></i></Link>}
-          {Auth.isAuthenticated() && <a href="#" onClick={logout} className="navbar-brand"><i className="fa fa-sign-out" aria-hidden="true"></i> Logout</a>}
+          {Auth.isAuthenticated() && <a href="#" onClick={logout} className="navbar-brand"><i className="fa fa-sign-out" aria-hidden="true"></i> </a>}
           {!Auth.isAuthenticated() && <Link to="/login" className="navbar-brand"><i className="fa fa-sign-in" aria-hidden="true"></i> Login</Link>}
           {!Auth.isAuthenticated() && <Link to="/register" className="navbar-brand"><i className="icon-chevron-sign-up" aria-hidden="true"></i> Register</Link>}
           {Auth.isAuthenticated() && <Link to={`/users/${Auth.getPayload().userId}`} className="navbar-brand"><i className="fa fa-user-o" aria-hidden="true"></i></Link>}
