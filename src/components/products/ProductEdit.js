@@ -69,10 +69,12 @@ class ProductsEdit extends React.Component {
 
   getDataURL = (dataURL) => {
     this.setState(prevState => {
-      const food = Object.assign({}, prevState.food, { base64: dataURL });
-      return { food };
+      const product = Object.assign({}, prevState.product, { base64: dataURL });
+      return { product };
     });
   }
+
+  //Autocomplete LatLng
 
   getAutocompleteInfo = (place) => {
     console.log('place', place);
@@ -82,7 +84,7 @@ class ProductsEdit extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1 className="font-lobster text-center"> Edit your product</h1>
         <hr />
         <ProductsForm

@@ -1,9 +1,11 @@
+@import 'vendor/carousel';
 @import 'colorVariable';
 @import 'overrideBootstrap';
 @import 'dragDrop';
 @import 'conversationsIndex';
 @import 'usersShow';
 @import 'chat';
+@import 'navbar';
 
 
 
@@ -16,11 +18,17 @@
 img {
   width: 100%
 }
-#hidden {
+.hidden {
   display: none;
 }
 body {
   background-color: #f1f1f1;
+  font-family: 'Exo 2', sans-serif;
+
+}
+
+.carousel {
+  height: 400px;
 }
 
 .bottom-border {
@@ -30,7 +38,18 @@ body {
 .has-warning {
   color: red;
 }
+.question {
+  height: 270px;
+  overflow: scroll;
+  width: 100%;
 
+}
+.userCommentImage {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  padding: 2px;
+}
 .hid-location {
   display: none;
 }
@@ -38,7 +57,7 @@ body {
   text-decoration: none;
   color: black;
   a:hover, a:focus {
-    color: lighten(green, 20%);
+    color: lighten(black, 40%);
     text-decoration: none;
     outline: none;
   }
@@ -58,7 +77,7 @@ body {
   height: 300px;
 }
 .medium {
-  height: 200px;
+  height: 250px;
 }
 .shaddow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -82,29 +101,8 @@ Link {
 }
 
 button {
-  margin: 5px;
+  margin: 2px;
 }
-
-nav {
-  background-color: rgb(69, 184, 98);
-  height: 120px;
-  position: fixed;
-  color: white;
-  .brand {
-    color: white;
-  }
-  .navbar-brand {
-    color: white;
-  }
-}
-.nav.navbar-nav li a {
-   color: #fff;
- }
-
-.nav.navbar-nav a:hover {
- color: grey;
-}
-
 
 .brand {
   font-family: 'Lobster', cursive;
@@ -121,6 +119,10 @@ nav {
 .container {
   margin-top: 60px;
 
+}
+
+.btn-login {
+  width: 50%;
 }
 
 
@@ -140,4 +142,16 @@ nav {
   align-items: center;
   height: 100%;
   width: 100%;
+}
+
+@media only screen  and (max-width: 900px) {
+  .carousel {
+    display: none;
+  }
+  .google-map {
+    margin: 10px;
+  }
+  .hidden {
+    display: flex;
+  }
 }

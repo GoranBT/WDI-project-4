@@ -16,7 +16,7 @@ const ConversationForm = ({ handleChange, handleSubmit, message, errors }) => {
             className="form-control"
           />
           {errors.message && <small className="has-error">{errors.message}</small>}
-          <button id="hidden" className="btn btn-primary">Send</button>
+          <button  className="btn btn-primary hidden">Send</button>
         </div>
       </form>
     </div>

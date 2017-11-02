@@ -24,21 +24,23 @@ class ProductsShow extends React.Component {
 
   getUser = (conversation) => {
     const { userId } = Auth.getPayload();
-    return conversation.sender.id === userId ? conversation.sender : conversation.receiver;
+    return conversation.sender.id === userId ? conversation.receiver : conversation.sender;
   }
 
   render() {
     return (
-      <div className="row" id="conversationsIndex">
-        {this.state.conversations && this.state.conversations.map(conversation => <div className="boxClass col-md-6" key={conversation.id}>
-          <Link className="btn btn-outline-success"
-            to={`/conversations/${conversation.id}`}>
-            <img src={this.getUser(conversation).imageSRC}/>
-            <span>{this.getUser(conversation).username}</span>
-          </Link>
-          <hr />
-        </div>)}
+      <div className="container">
+        <div className="row" id="conversationsIndex">
+          {this.state.conversations && this.state.conversations.map(conversation => <div className="boxClass col-md-6" key={conversation.id}>
+            <Link className="btn btn-outline-success"
+              to={`/conversations/${conversation.id}`}>
+              <img src={this.getUser(conversation).imageSRC}/>
+              <span>{this.getUser(conversation).username}</span>
+            </Link>
+            <hr />
+          </div>)}
 
+        </div>
       </div>
     );
   }

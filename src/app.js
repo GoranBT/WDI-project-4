@@ -20,11 +20,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Navbar />
-          <div className="container">
-
-            <Routes/>
-
-          </div>
+          <Routes/>
         </div>
       </BrowserRouter>
     );

@@ -15,7 +15,6 @@ class OAuthButton extends React.Component {
     if(!this.props.location.search.match(/code/) ||
      localStorage.getItem('provider') !== this.props.provider) return false;
     //get the querystring out of the address bar, as an Object
-    // { code: 'dsadasdasdsadasdas'}
     const data = queryString.parse(this.props.location.search);
     data.redirectUri = window.location.origin + window.location.pathname;
     //send the code to the API
@@ -35,7 +34,7 @@ class OAuthButton extends React.Component {
   render() {
 
     return (
-      <a className="btn btn-primary"
+      <a className="btn btn-primary btn-login"
         href={this.provider.authLink}
         onClick={this.setProvider}>
         {this.props.children}

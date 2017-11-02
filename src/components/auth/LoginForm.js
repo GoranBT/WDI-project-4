@@ -3,7 +3,7 @@ import React from 'react';
 
 const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
   return (
-    <form onSubmit={handleSubmit} className="box rounded col-md-6">
+    <form onSubmit={handleSubmit}>
       <div className="form-group">
         <input
           type="text"
@@ -26,7 +26,7 @@ const LoginForm = ({ handleChange, handleSubmit, credentials, error }) => {
         {error && <small className="has-warning">{error}</small>}
       </div>
 
-      <button className="btn btn-primary">Login</button>
+      <button className="btn btn-primary btn-login">Login</button>
     </form>
   );
 };

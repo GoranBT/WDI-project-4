@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema({
     lat: Number,
     lng: Number
   },
-  comments: [ commentSchema ]
+  questions: [ commentSchema ]
 }, {
   timestamps: true
 });

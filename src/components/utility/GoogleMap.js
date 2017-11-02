@@ -12,6 +12,8 @@ class GoogleMap extends React.Component {
 
     });
 
+    // circle
+
     const circleIcon = {
       path: 'M 0, 0 m -10, 0 a 10, 10 0 1, 0 20, 0 a 10, 10 0 1, 0 -20, 0',
       fillColor: '#00ff00',

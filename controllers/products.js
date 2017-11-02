@@ -3,7 +3,7 @@ const Product = require('../models/product');
 function productsIndex(req, res, next) {
   Product
     .find()
-    .populate('category postedBy comments.createdBy')
+    .populate('category postedBy questions.createdBy')
     .sort({createdAt: -1})
     .exec()
     .then(products => res.json(products))
@@ -23,7 +23,7 @@ function productsCreate(req, res, next) {
 function productsShow(req, res, next) {
   Product
     .findById(req.params.id)
-    .populate('category postedBy comments.createdBy')
+    .populate('category postedBy questions.createdBy')
     .exec()
     .then((product) => {
       if(!product) return res.notFound();
@@ -70,11 +70,11 @@ function addCommentRoute(req, res, next) {
     .then((product) => {
       if(!product) return res.notFound();
 
-      const comment = product.comments.create(req.body);
-      product.comments.push(comment);
+      const question = product.questions.create(req.body);
+      product.questions.push(question);
 
       return product.save()
-        .then(() => res.json(comment));
+        .then(() => res.json(question));
     })
     .catch(next);
 }
@@ -85,8 +85,8 @@ function deleteCommentRoute(req, res, next) {
     .then((product) => {
       if(!product) return res.notFound();
 
-      const comment = product.comments.id(req.params.commentId);
-      comment.remove();
+      const question = product.questions.id(req.params.questionId);
+      question.remove();
 
       return product.save();
     })

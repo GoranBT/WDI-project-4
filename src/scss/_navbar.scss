@@ -1,0 +1,19 @@
+nav {
+  background-color: rgb(69, 184, 98);
+  height: 120px;
+  position: fixed;
+  color: white;
+  .brand {
+    color: white;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .nav.navbar-nav li a {
+     color: #fff;
+   }
+
+  .nav.navbar-nav a:hover {
+   color: grey;
+  }
+}

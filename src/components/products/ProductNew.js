@@ -33,6 +33,8 @@ class ProductsNew extends React.Component {
     }
   };
 
+  // get categories
+
   componentDidMount() {
     Axios
       .get('/api/categories')
@@ -46,23 +48,24 @@ class ProductsNew extends React.Component {
     this.setState({ product });
   }
 
+
   handleLocationChange = ({ target: { name, value } }) => {
     const product = { ...this.state.product, location: { ...this.state.product.location, [name]: value } };
     this.setState({ product });
   }
 
+
   handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(this.state.product);
-
     Axios
       .post('/api/products', this.state.product, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      .then(() => this.props.history.push('/'))
+      .then(() => this.props.history.push('/products'))
       .catch(err => this.setState({ errors: err.response.data.errors }));
   }
+
+  //Autocomplete LatLng
 
   getAutocompleteInfo = (place) => {
     console.log('place', place);
@@ -73,7 +76,7 @@ class ProductsNew extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="container">
         <h1 className="font-lobster text-center"> Add new product</h1>
         <hr />
         <ProductForm

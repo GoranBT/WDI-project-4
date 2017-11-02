@@ -63,7 +63,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user, errors }) => {
         {errors.passwordConfirmation && <small className="has-warning">{errors.passwordConfirmation}</small>}
       </div>
 
-      <button className="btn btn-primary">Register</button>
+      <button className="btn btn-primary btn-login">Register</button>
     </form>
   );
 };

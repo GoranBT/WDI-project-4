@@ -39,13 +39,16 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div className="justify-content-around box rounded col-md-6">
-        <LoginForm
-          user={this.state.user}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          errors={this.state.errors}
-        />
+      <div className="container">
+        <h1 className="text-center newProduct font-lobster">Create your eShopper Account</h1>
+        <div className="newProduct shaddow white box rounded col-md-8 offset-md-2">
+          <LoginForm
+            user={this.state.user}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            errors={this.state.errors}
+          />
+        </div>
       </div>
     );
   }

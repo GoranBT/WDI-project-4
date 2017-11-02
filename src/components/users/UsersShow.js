@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 import Auth from '../../lib/Auth';
@@ -24,20 +24,37 @@ class UsersShow extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6">
-          <div className="medium objectImage">
-            {this.state.user.createdAt && <img src={this.state.user.imageSRC} className="userImage rounded-circle" />}
-          </div>
-          <div>
-            {this.state.user.createdAt && <p>User: {this.state.user.username}</p>}
-            {this.state.user.createdAt && <p>since: {this.state.user.createdAt.substr(0, 10)}</p>}
-          </div>
-        </div>
-        <div className="col-md-6">
-          {this.state.user.products && this.state.user.products.map(product => <div key={product.id}>{product.name}</div>)}
-        </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 col-sm-12 my">
+            <div className="">
+              {this.state.user.createdAt && <img src={this.state.user.imageSRC} className="userImage rounded-circle objectImage" />}
+            </div>
+            <hr />
+            <div>
+              {this.state.user.username && <h4 className="">User: {this.state.user.username}</h4>}
+              {this.state.user.createdAt && <h4 className="">Registered since: {this.state.user.createdAt.substr(0, 10)}</h4>}
+            </div>
 
+          </div>
+
+          <div className="col-md-6 col-sm-12 my">
+
+            {this.state.user.products && <h4 className="">Total products: {this.state.user.products.length} </h4>}
+            {this.state.user && <h4 className="">More products from {this.state.user.username}</h4>}
+            <hr />
+            <div className="row">
+
+              {this.state.user.products && this.state.user.products.map(product => <div  className="col-md-4" key={product.id}>
+                <Link to={`/products/${product.id}`}> <div>
+                  <img className="userItems" src={product.imageSRC}/>
+                  <p className="text-center">{product.name}</p>
+                </div>
+                </Link>
+              </div>)}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

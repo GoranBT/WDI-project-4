@@ -38,10 +38,10 @@ router.route('/conversations/:id/messages')
 router.route('/conversations/:id')
   .get(secureRoute, conversations.show);
 
-router.route('/products/:id/comments')
+router.route('/products/:id/questions')
   .post(secureRoute, products.createComments);
 
-router.route('/products/:id/comments/:commentId')
+router.route('/products/:id/questions/:questionId')
   .delete(secureRoute, products.deleteComments);
 
 router.route('/users')

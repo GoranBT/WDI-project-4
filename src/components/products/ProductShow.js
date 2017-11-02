@@ -2,15 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import GoogleMap from '../utility/GoogleMap';
-import CommentsForm from './ProductCommentsForm';
+import QuestionsForm from './ProductQuestionsForm';
 
 import Auth from '../../lib/Auth';
 
 class ProductsShow extends React.Component {
   state = {
     product: {},
-    comment: ''
+    question: ''
   }
+
+  //Get product
 
   componentWillMount() {
     Axios
@@ -22,6 +24,8 @@ class ProductsShow extends React.Component {
       });
   }
 
+  //Delete product
+
   deleteProduct = () => {
     Axios
       .delete(`/api/products/${this.props.match.params.id}`,{
@@ -29,6 +33,8 @@ class ProductsShow extends React.Component {
       })
       .then(() => this.props.history.push('/products'));
   }
+
+  //Create conversation on click -> message button
 
   createConversation = (e) => {
     e.preventDefault();
@@ -40,9 +46,10 @@ class ProductsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
+
+  //Change Boolean to sold true on click -> sold button
   sellProduct = (e) => {
     e.preventDefault();
-    console.log('check box',  e.target);
 
     Axios
       .put(`/api/products/${this.props.match.params.id}`, { sold: !this.state.product.sold }, {
@@ -58,22 +65,23 @@ class ProductsShow extends React.Component {
       });
   }
 
+  //Ask question -> sending questions
 
   handleChange = ({ target: { value }}) => {
-    this.setState({ comment: value }, () => console.log(this.state));
+    this.setState({ question: value }, () => console.log(this.state));
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
     Axios
-      .post(`/api/products/${this.props.match.params.id}/comments`, { text: this.state.comment }, {
+      .post(`/api/products/${this.props.match.params.id}/questions`, { text: this.state.question }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       .then(res => this.setState(prevState => {
-        const comments = prevState.product.comments.concat(res.data);
-        const product = { ...prevState.product, comments };
-        return { product, comment: '' };
+        const questions = prevState.product.questions.concat(res.data);
+        const product = { ...prevState.product, questions };
+        return { product, question: '' };
       }))
       .catch(err => this.setState({ errors: err.response.data.errors }));
   }
@@ -82,67 +90,105 @@ class ProductsShow extends React.Component {
   render() {
     const { product } = this.state;
     return (
-      <div className="row justify-content-between">
-        <div className="my col-lg-4 col-md-6 mb-4">
-          <div className="card overlay-wrapper">
-            <img className="sold card-img-top" src={product.imageSRC} alt="Card image cap" />
-            {product.sold ? <div className="sold-overlay"><span>Sold</span></div> : null}
-          </div>
-          <ul>
-            {this.state.product.comments && product.comments.map(comment => {
-              return(
-                <li key={comment.id}>
-                  <p>{comment.text}</p>
-                  <small>{comment.createdBy.username}</small>
-                </li>
-              );
-            })}
-          </ul>
-          <CommentsForm
-            comment={this.state.comment}
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-          />
-        </div>
+      <div className="container">
+        <div className="row justify-content-between">
+          <div className="my col-lg-4 col-md-6">
+            <div className="card overlay-wrapper">
+              <img className="sold card-img-top" src={product.imageSRC} alt="Card image cap" />
+              {product.sold ? <div className="sold-overlay"><span id="item-sold">Sold</span></div> : null}
+            </div>
+            <hr/>
+            {/* questions section */}
+            <h6>Questions</h6>
+            <div className="question">
 
-        <div className="my spaceBetween col-lg-4 col-md-6 mb-4">
-          <p><strong>Product:</strong> {product.name}</p>
-          <p><strong>Description:</strong> {product.description}</p>
-          <p><strong>Price:</strong> {product.price}£</p>
-          <p><strong>Conditoon:</strong> {product.condition}</p>
-          {<p><strong>Category:</strong> {product.category && product.category.name}</p>}
-          {product.postedBy && Auth.isAuthenticated() && Auth.getPayload().userId !== product.postedBy.id && <button className="btn btn-outline-success" onClick={this.createConversation} ><i className="fa fa-envelope" aria-hidden="true"></i> message</button>}
-          {product.postedBy && Auth.isAuthenticated() && Auth.getPayload().userId === product.postedBy.id && <Link to={`/products/${product.id}/edit`}><button className="btn btn-outline-success">
-            <i className="fa fa-pencil" aria-hidden="true"></i>Edit
-          </button></Link>}
-          {' '}
-          {product.postedBy && Auth.isAuthenticated() && Auth.getPayload().userId === product.postedBy.id && <button className="btn btn-outline-success" onClick={this.deleteProduct}>
-            <i className="fa fa-trash" aria-hidden="true"></i>Delete
-          </button>}
-          {
-            product.postedBy && Auth.isAuthenticated() && Auth.getPayload().userId === product.postedBy.id &&
-              <button className="btn btn-outline-success" onClick={this.sellProduct}>
-                { product.sold ? 'Mark as unsold' : 'Mark as sold'}
-              </button>
-          }
-          <hr />
-          <div>
-            {product.location &&
-              <GoogleMap
-                center={product.location}
-              />}
+              <QuestionsForm
+                question={this.state.question}
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+              />
+              {this.state.product.questions && product.questions.map(question => {
+                return(
+                  <div key={question.id}>
+                    <img className="userCommentImage" src={question.createdBy.imageSRC}/>
+                    <span className=""><small>{question.text}</small></span>
+                  </div>
+                );
+              })}
+
+            </div>
+
           </div>
-        </div>
-        <div className="my col-lg-4 col-md-6 mb-4">
-          <div className="card h-100">
-            {product.postedBy && <Link to={`/users/${product.postedBy.id}`}>
-              {product.postedBy && <img className="card-img-top" src={product.postedBy.imageSRC} alt=""></img>}
-              <div className="card-body">
-                <h4 className="bottom-border card-title">
-                  {product.postedBy && product.postedBy.username}
-                </h4>
-              </div>
-            </Link>}
+
+          {/* Product Information section */}
+
+          <div className="my spaceBetween col-lg-4 col-md-6">
+            {product.name && <p><strong>Product:</strong> {product.name}</p>}
+            {product.description && <p><strong>Description:</strong> {product.description}</p>}
+            {product.price && <p><strong>Price:</strong> {product.price}£</p>}
+            {product.condition && <p><strong>Conditoon:</strong> {product.condition}</p>}
+            {<p><strong>Category:</strong> {product.category && product.category.name}</p>}
+            <hr />
+            {/* message button */}
+
+            {product.postedBy && Auth.isAuthenticated()
+              && Auth.getPayload().userId !== product.postedBy.id
+              && <button className="btn btn-outline-success" onClick={this.createConversation} >
+                <i className="fa fa-envelope" aria-hidden="true"></i> message</button>}
+
+            {/* edit button visible by the product's owner */}
+
+            {product.postedBy && Auth.isAuthenticated()
+                  && Auth.getPayload().userId === product.postedBy.id
+                  && <Link to={`/products/${product.id}/edit`}>
+                    <button className="btn btn-outline-success">
+                      <i className="fa fa-pencil" aria-hidden="true"></i>Edit
+                    </button></Link>}
+
+            {/* delete button visible by the product's owner */}
+
+
+            {product.postedBy && Auth.isAuthenticated()
+                    && Auth.getPayload().userId === product.postedBy.id
+                    && <button className="btn btn-outline-success" onClick={this.deleteProduct}>
+                      <i className="fa fa-trash" aria-hidden="true"></i>Delete
+                    </button>}
+
+            {/* sold button visible by the product's owner */}
+
+
+            {product.postedBy && Auth.isAuthenticated() && Auth.getPayload().userId === product.postedBy.id &&
+                      <button className="btn btn-outline-success" onClick={this.sellProduct}>
+                        { product.sold ? 'Mark as unsold' : 'Mark as sold'}
+                      </button>}
+
+            <hr />
+
+            {/* GoogleMap section */}
+
+            <div>
+              {product.location &&
+                          <GoogleMap
+                            center={product.location}
+                          />}
+            </div>
+          </div>
+
+          {/* Seller Information */}
+
+          <div className="my col-lg-4 col-md-6">
+            <div className="card">
+              {product.postedBy && <Link to={`/users/${product.postedBy.id}`}>
+                {product.postedBy &&
+                            <img className="card-img-top" src={product.postedBy.imageSRC} alt=""></img>}
+
+                <div className="card-body">
+                  <h6 className="bottom-border card-title text-center">
+                                Username: {product.postedBy && product.postedBy.username}
+                  </h6>
+                </div>
+              </Link>}
+            </div>
           </div>
         </div>
       </div>

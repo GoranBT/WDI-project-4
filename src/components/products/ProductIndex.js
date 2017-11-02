@@ -26,15 +26,21 @@ class ProductIndex extends React.Component {
       .catch(err => console.error(err));
   }
 
+  //category filter
+
   handleOrigin = (e) => {
     const filter = e.target.value;
     this.setState({ filter });
   }
 
+  //search bar
+
   handleSearch = (e) => {
     const query = e.target.value;
     this.setState({query});
   }
+
+  //sort by
 
   handleSort = (e) => {
     const [sortBy, sortDirection] = e.target.value.split('|');
@@ -51,44 +57,41 @@ class ProductIndex extends React.Component {
     if(this.state.filter) products = _.filter(products, (product) => this.state.filter === product.category.name);
 
     return (
-
-
-
-      <div className="row">
-        <div className="col-lg-9">
-          <div className="row">
-            {products.map(product => {
-              return (
-                <div key={product.id} className="col-lg-4 col-md-6 mb-4">
-                  <div className="shaddow card h-100">
-                    <Link to={`/products/${product.id}`}>
-                      <div className="overlay-wrapper">
-                        <img className="card-img-top medium objectImage" src={product.imageSRC} alt=""></img>
-                        {product.sold ? <div className="sold-overlay"><span>Sold</span></div> : null}
-                      </div>
-
-                      <div className="card-body">
-                        <h4 className="bottom-border card-title">
-                          {product.name}
-                        </h4>
-                        <h5 className="bottom-border">price £{product.price}</h5>
-                        <p className="card-text">{product.description}</p>
-                      </div>
-                    </Link>
-                  </div>
-                </div>);
-            })}
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-9">
+            <div className="row">
+              {products.map(product => {
+                return (
+                  <div key={product.id} className="col-lg-4 col-md-6 mb-4">
+                    <div className="shaddow card h-100">
+                      <Link to={`/products/${product.id}`}>
+                        <div className="overlay-wrapper">
+                          <img className="card-img-top medium objectImage" src={product.imageSRC} alt=""></img>
+                          {product.sold ? <div className="sold-overlay"><span>Sold</span></div> : null}
+                        </div>
+                        <div className="card-body">
+                          <h4 className="bottom-border card-title">
+                            {product.name}
+                          </h4>
+                          <h5 className="bottom-border">price £{product.price}</h5>
+                          <p className="card-text">{product.description}</p>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>);
+              })}
+            </div>
+          </div>
+          <div id="search-bar" className="col-lg-3">
+            <SearchBar
+              categories={this.state.categories}
+              handleOrigin={this.handleOrigin}
+              handleSort={this.handleSort}
+              handleSearch={this.handleSearch}
+            />
           </div>
         </div>
-        <div id="search-bar" className="col-lg-3">
-          <SearchBar
-            categories={this.state.categories}
-            handleOrigin={this.handleOrigin}
-            handleSort={this.handleSort}
-            handleSearch={this.handleSearch}
-          />
-        </div>
-
       </div>);
   }
 }

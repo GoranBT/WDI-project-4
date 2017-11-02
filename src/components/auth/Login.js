@@ -32,17 +32,17 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="justify-content-around">
+      <div className="container">
+        <div className="newProduct shaddow white box rounded col-md-8 offset-md-2">
           <LoginForm
             credentials={this.state.credentials}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             error={this.state.error}
           />
+          <OAuthButton provider="facebook"><i className="fa fa-facebook" aria-hidden="true"></i> Login with Facebook</OAuthButton>
         </div>
         <div>
-          <OAuthButton provider="facebook"><i className="fa fa-facebook" aria-hidden="true"></i> Login with Facebook</OAuthButton>
         </div>
       </div>
     );

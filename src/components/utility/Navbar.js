@@ -16,10 +16,16 @@ const Navbar = ({ history }) => {
 
     <nav className="navbar navbar-default">
       <div className="container-fluid">
+
+        {/* navbar left side */}
+
         <div className="navbar-header">
           <Link className="brand font-lobster display-4 nav-link" to="/"><i className="fa fa-shopping-cart" aria-hidden="true"></i> eShopper
           </Link>
         </div>
+
+        {/* navbar right side */}
+
         <div className="navbar-right">
           {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products">Products</Link>}
           {Auth.isAuthenticated() && <Link className="navbar-brand" to="/products/new">Add Product</Link>}

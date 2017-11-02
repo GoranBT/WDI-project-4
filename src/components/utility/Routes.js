@@ -21,10 +21,10 @@ const Routes = () => {
       <Route exact path="/products" component={ProductIndex} />
       <ProtectedRoute exact path="/products/new" component={ProductNew} />
       <ProtectedRoute  path="/products/:id/edit" component={ProductEdit} />
-      <Route  path="/products/:id" component={ProductShow} />
+      <Route exact path="/products/:id" component={ProductShow} />
       <ProtectedRoute exact path="/conversations" component={ConversationIndex} />
-      <ProtectedRoute  path="/conversations/:id" component={ConversationShow} />
-      <ProtectedRoute  path="/users/:id" component={UsersShow} />
+      <ProtectedRoute exact path="/conversations/:id" component={ConversationShow} />
+      <ProtectedRoute exact path="/users/:id" component={UsersShow} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
       <Route component={NoRoute} />
