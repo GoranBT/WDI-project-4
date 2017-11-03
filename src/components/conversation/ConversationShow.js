@@ -29,7 +29,7 @@ class ConversationShow extends React.Component {
   // control the scroll position -> chat
 
   stickyScroll() {
-    var objDiv = document.getElementsByClassName('conversation-scroll')[0];
+    var objDiv = document.getElementsByClassName('conversation')[0];
     objDiv.scrollTop = objDiv.scrollHeight;
   }
 
@@ -58,9 +58,9 @@ class ConversationShow extends React.Component {
         <div className="box white rounded">
           {<h1>{!this.state.conversation && this.state.conversation.sender.username}</h1>}
           <div className="conversation-scroll">
-            <div className="conversation content container-fluid bootstrap snippets">
+            <div className="conversation content bootstrap snippets">
               <div className="row row-broken">
-                <div className="col-sm-11 col-xs-12 chat">
+                <div className="col-md-10 col-sm-12 col-xs-12 chat">
                   <div className="col-inside-lg decor-default">
                     <div className="chat-body">
                       {this.state.conversation.messages.map(message => (
