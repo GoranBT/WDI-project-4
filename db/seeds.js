@@ -19,26 +19,6 @@ User.create([{
   password: 'password',
   passwordConfirmation: 'password'
 
-}, {
-  username: 'Dush',
-  email: 'dush@ga.com',
-  password: 'password',
-  passwordConfirmation: 'password'
-}, {
-  username: 'Mike',
-  email: 'mike@ga.com',
-  password: 'password',
-  passwordConfirmation: 'password'
-}, {
-  username: 'Vlad',
-  email: 'vlad@ga.com',
-  password: 'password',
-  passwordConfirmation: 'password'
-}, {
-  username: 'Leo',
-  email: 'leo@ga.com',
-  password: 'password',
-  passwordConfirmation: 'password'
 }
 ])
   .then((users) => {
@@ -74,175 +54,20 @@ User.create([{
       .then((categories) => {
         console.log(`${categories.length} categories created!`);
         return Product
-          .create([{
-            name: 'Mish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 50,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Nish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 40,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Bish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 30,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Vish tank',
-            category: categories[4],
-            description: '40l fish tank filter and air pump are included',
-            price: 20,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[1],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Cish tank',
-            category: categories[3],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Xish tank',
-            category: categories[4],
-            description: '40l fish tank filter and air pump are included',
-            price: 100,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[3],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Zish tank',
-            category: categories[5],
-            description: '40l fish tank filter and air pump are included',
-            price: 200,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Aish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Rish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Fish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Fish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Fish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          },
-          {
-            name: 'Fish tank',
-            category: categories[2],
-            description: '40l fish tank filter and air pump are included',
-            price: 80,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
-            postedBy: users[0],
-            condition: 'Used',
-            location: {
-              lat: '50.12',
-              lng: '-0.12'
-            }
-          }])
+          .create([
+            {
+              name: 'Fish tank',
+              category: categories[2],
+              description: '40l fish tank filter and air pump are included',
+              price: 80,
+              image: 'https://images-na.ssl-images-amazon.com/images/I/51GV%2BHvLEtL._SL500_AC_SS350_.jpg',
+              postedBy: users[0],
+              condition: 'Used',
+              location: {
+                lat: '50.12',
+                lng: '-0.12'
+              }
+            }])
           .then(products => console.log(`${products.length} products created!`));
       });
   })
