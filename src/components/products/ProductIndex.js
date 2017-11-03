@@ -68,7 +68,7 @@ class ProductIndex extends React.Component {
                       <Link to={`/products/${product.id}`}>
                         <div className="overlay-wrapper">
                           <img className="card-img-top medium objectImage" src={product.imageSRC} alt=""></img>
-                          {product.sold ? <div className="sold-overlay"><span>Sold</span></div> : null}
+                          {product.sold ? <div className="sold-overlay"><span className="sold-product">Sold</span></div> : null}
                         </div>
                         <div className="card-body">
                           <h4 className="bottom-border card-title">

@@ -45,7 +45,7 @@ class UsersShow extends React.Component {
             <hr />
             <div className="row">
 
-              {this.state.user.products && this.state.user.products.map(product => <div  className="col-md-4 col-sm-12" key={product.id}>
+              {this.state.user.products && this.state.user.products.map(product => <div  className="col-md-4 col-sm-6-offset-4" key={product.id}>
                 <Link to={`/products/${product.id}`}> <div>
                   <img className="userItems" src={product.imageSRC}/>
                   <p className="text-center">{product.name}</p>

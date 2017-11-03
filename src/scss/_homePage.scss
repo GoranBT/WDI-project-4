@@ -1,0 +1,55 @@
+
+.imageHolder {
+  height: 300px;
+
+}
+.home-padding {
+  padding: 0 30px 30px 30px;
+}
+.overlay {
+    position: relative;
+    width: 50%;
+}
+
+.imageHolder {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.overlay:hover .imageHolder {
+  opacity: 0.3;
+}
+
+.overlay:hover .middle {
+  opacity: 1;
+}
+
+.home-text {
+  color: $main-green;
+  font-size: 3rem;
+  padding: 16px 32px;
+  font-weight: bold;
+}
+
+.carousel {
+  height: 50vh;
+  position: relative;
+}
+
+.carousel-content {
+  position: absolute;
+  top: 11%;
+  left: 9%;
+}

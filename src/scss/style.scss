@@ -6,6 +6,8 @@
 @import 'usersShow';
 @import 'chat';
 @import 'navbar';
+@import 'footer';
+@import 'homePage';
 
 
 
@@ -13,7 +15,7 @@
   box-sizing: border-box;
 }
 .box {
-  border: 1px solid #d3d3d3;
+  border: 1px solid $border-color;
 }
 img {
   width: 100%
@@ -27,23 +29,14 @@ body {
 
 }
 
-.carousel {
-  height: 60vh;
-  position: relative;
-}
-
-.carousel-content {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-}
 
 .bottom-border {
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid $border-color;
 }
 
 .has-warning {
   color: red;
+  opacity: 0.9;
 }
 .question {
   height: 270px;
@@ -92,19 +85,20 @@ body {
 }
 
 .col-md-6 {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 .newProduct {
   padding: 30px;
 }
+
 
 Link {
   color: black;
 }
 
 .google-map {
-  height: 200px;
+  height: 250px;
 }
 
 button {
@@ -123,6 +117,7 @@ button {
 }
 
 
+
 .container {
   margin-top: 60px;
 
@@ -136,27 +131,47 @@ button {
 .overlay-wrapper {
   position: relative;
 }
+.white-text {
+  color: $carousel-text;
+  line-height: 1.4;
+  font-size: 3rem;
+}
 
 .sold-overlay {
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,0.5);
-  color: white;
+  color: $main-green;
+  font-family: 'Lobster', cursive;
   font-weight: bold;
   display: flex;
+  font-size: 4rem;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-}
 
+}
+.sold-product {
+-ms-transform: rotate(-15deg);
+ -webkit-transform: rotate(-15deg);
+ transform: rotate(-15deg);
+ }
 .container-fluid {
   // margin-top: 20px;
   padding: 60px;
 }
+.carousel.carousel-slider .control-arrow:hover {
+  background-color: $main-green;
+}
 
-@media only screen  and (max-width: 900px) {
+hr {
+  background-color: $main-green;
+  width: 100%;
+}
+
+@media only screen  and (max-width: 1000px) {
   .carousel {
     display: none;
   }
@@ -166,15 +181,22 @@ button {
   .hidden {
     display: flex;
   }
-
+  .questions-hidden {
+    display: none;
+  }
 }
 @media only screen  and (max-width: 700px) {
 .brand {
   font-size: 15px;
 }
 .userImage {
-  height: 250px;
-  width: 250px;
-
+  height: 300px;
+  width: 300px;
+}
+.navbar-brand {
+  font-size: 1rem;
+}
+.userItems {
+  width: 300px
 }
 }

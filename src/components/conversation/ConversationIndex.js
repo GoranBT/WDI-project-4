@@ -31,7 +31,7 @@ class ProductsShow extends React.Component {
     return (
       <div className="container">
         <div className="row" id="conversationsIndex">
-          {this.state.conversations && this.state.conversations.map(conversation => <div className="boxClass col-md-6" key={conversation.id}>
+          {this.state.conversations && this.state.conversations.map(conversation => <div className="boxClass col-md-6 mobile-center" key={conversation.id}>
             <Link className="btn btn-outline-success"
               to={`/conversations/${conversation.id}`}>
               <img src={this.getUser(conversation).imageSRC}/>

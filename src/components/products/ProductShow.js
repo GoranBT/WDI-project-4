@@ -92,37 +92,38 @@ class ProductsShow extends React.Component {
     return (
       <div className="container">
         <div className="row justify-content-between">
-          <div className="my col-lg-4 col-md-6">
+          <div className="my col-lg-4 col-md-12 col-sm-12">
             <div className="card overlay-wrapper">
               <img className="sold card-img-top" src={product.imageSRC} alt="Card image cap" />
-              {product.sold ? <div className="sold-overlay"><span id="item-sold">Sold</span></div> : null}
+              {product.sold ? <div className="sold-overlay"><span className="sold-product">Sold</span></div> : null}
             </div>
             <hr/>
-            {/* questions section */}
-            <h6>Questions</h6>
-            <div className="question">
+            <div className="questions-hidden">
+              {/* questions section */}
+              <h6>Questions</h6>
+              <div className="question">
 
-              <QuestionsForm
-                question={this.state.question}
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-              />
-              {this.state.product.questions && product.questions.map(question => {
-                return(
-                  <div key={question.id}>
-                    <img className="userCommentImage" src={question.createdBy.imageSRC}/>
-                    <span className=""><small>{question.text}</small></span>
-                  </div>
-                );
-              })}
+                <QuestionsForm
+                  question={this.state.question}
+                  handleSubmit={this.handleSubmit}
+                  handleChange={this.handleChange}
+                />
+                {this.state.product.questions && product.questions.map(question => {
+                  return(
+                    <div key={question.id}>
+                      <img className="userCommentImage" src={question.createdBy.imageSRC}/>
+                      <span className=""><small>{question.text}</small></span>
+                    </div>
+                  );
+                })}
 
+              </div>
             </div>
-
           </div>
 
           {/* Product Information section */}
 
-          <div className="my spaceBetween col-lg-4 col-md-6">
+          <div className="my spaceBetween col-lg-4 col-md-6 col-sm-12">
             {product.name && <p><strong>Product:</strong> {product.name}</p>}
             {product.description && <p><strong>Description:</strong> {product.description}</p>}
             {product.price && <p><strong>Price:</strong> {product.price}£</p>}
@@ -176,7 +177,7 @@ class ProductsShow extends React.Component {
 
           {/* Seller Information */}
 
-          <div className="my col-lg-4 col-md-6">
+          <div className="my col-lg-4 col-md-6 col-sm-12">
             <div className="card">
               {product.postedBy && <Link to={`/users/${product.postedBy.id}`}>
                 {product.postedBy &&

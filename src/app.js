@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap-css-only';
 import Routes from './components/utility/Routes';
 import Navbar from './components/utility/Navbar';
+// import Footer from './components/utility/Footer';
 import 'font-awesome/css/font-awesome.css';
 import './scss/style.scss';
 
@@ -21,6 +22,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Routes/>
+
         </div>
       </BrowserRouter>
     );
